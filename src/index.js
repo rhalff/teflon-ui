@@ -44,18 +44,3 @@ Actor
     }
 })
 
-// so now also a logic layer.
-// I'm also still missing jsPlumb part to actually load a graph.
-// and ofcourse the typeahead thing.
-
-// ok and this is then when chix-flow should be wired up.
-// to handle for example the key downs.
-// I know the value of the input is easily available useing srcElement.value.
-// but don't wanna do it like that.
-// How about each component get's access to the store within it's own namespace.
-// where the global store holds all.
-// A store of stores where each store can has it's own adapter.
-// that'll be kinda wicked.
-// Store then contains.. the named instances. it's path in the main store is the mount path.
-// nope.
-

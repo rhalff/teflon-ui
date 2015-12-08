@@ -30,13 +30,6 @@ export default {
   states: {
     'default': {
       events: [
-        // gah, problem, now it's dynamic
-        // I made it so all those events will work for the repetitions.
-        // however what is emitted will be button click, so now it should be computed
-        // from the listener. is that bad? I think the below should also just work.
-        // because a path does not have to exist to be registered.
-        // right now it initially has to exist.
-        // phantom event registering is interesting
         { path: 'icon-close', op: 'add', name: 'click', val: 'CLOSE'},
         { path: 'icon-new', op: 'add', name: 'click', val: 'NEW'},
         { path: 'icon-save', op: 'add', name: 'click', val: 'SAVE'},
@@ -48,18 +41,11 @@ export default {
         { path: 'icon-zoom-in', op: 'add', name: 'click', val: 'ZOOM-IN'},
         { path: 'icon-zoom-out', op: 'add', name: 'click', val: 'ZOOM-OUT'},
         { path: 'icon-trash', op: 'add', name: 'click', val: 'DELETE'},
-        // root element (of mount point)
-        // { path: ':0', op: 'add', name: 'mousemove', val: 'ACTION.MOVE'}
       ]
     },
     'play': {
       attributes: [
-        // this one is not applied, note, it's rendered dynamically now.
-        // also note: :0:0[4] should/must work as well.
-        // anyway is this state applied at all?
-        { path: 'icon-play', op: 'add', name: 'class', val: 'active'},
-        // root element (of mount point)
-        // { path: ':0', op: 'add', name: 'mousemove', val: 'ACTION.MOVE'}
+        { path: 'icon-play', op: 'add', name: 'class', val: 'active'}
       ]
     }
   },

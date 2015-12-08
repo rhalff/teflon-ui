@@ -90,17 +90,6 @@ export default class UI {
         }
       } else if(type === 'ui') {
         return function(ev, src){
-
-          // TODO: make src.dataset.teflonIndex prettier
-
-          // ok, the idea was I can omit path in the attributes state definition.
-          // and if it's the case, we dynamically add it.
-          // so now I must do so, but where?
-          // src, ok, and then get the path, this.dp.path(
-          // seems to me the second parameter should be path?
-          // it's not about the src element here, it's what we get back.
-          //
-
           // TODO: * from within component will not work
           const res = func(ev, _this.state.get(this.name), src)
           // TODO: what to do about unsetting the state?
@@ -108,7 +97,6 @@ export default class UI {
           if (res) {
             Object.keys(res).forEach((path) => {
               // TODO: teflon does not yet understand el as parameter.
-              // err nice and how to disable? :-)
               this.activateState(res[path], this.dp.resolve(path)) // this.dp.getRef(path))
             })
           }
@@ -139,12 +127,6 @@ export default class UI {
         dataMap[def.properties[name].path] = name
         switch (def.properties[name].type) {
           case "array":
-            // ok this gives a slight problem and triggers a bug.
-            // it renders nothing first, but it also does not delete the li correctly.
-            // it seems to remove what is within the li.
-            // anyway after that what it needs is not found
-            // or do I not use cloneNode(true) somewhere?
-
             // This triggers the bug
             // initializing bullets to []
             let key2 = def.properties[name].path
