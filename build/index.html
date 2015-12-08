@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>UI</title>
+
+    <!-- Bootstrap -->
+    <!-- link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" -->
+    <link href="../html/css/app.css" rel="stylesheet">
+
+    <script src="../node_modules/babel-polyfill/dist/polyfill.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div id="main">
+    <div id="navBarPosition"></div>
+    <div id="bottomBarPosition"></div>
+    <div id="iconBarPosition"></div>
+    <div id="bulletBarPosition"></div>
+    <nav role="navigation" class="navbar navbar-inverse navbar-fixed-bottom">
+        <div id="selectionControl"></div>
+        <div id="windowControl"></div>
+        <div id="bullets"></div>
+        <div id="server-switch"></div>
+    </nav>
+</div>
+
+<template id="navBarTpl">
+    <nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand">Chiχ UI</a>
+            <form role="search" class="navbar-form navbar-left">
+                <div class="form-group">
+                    <span class="twitter-typeahead" style="position: relative; display: inline-block;"><input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled="" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);"><input id="searchForm" type="search" placeholder="open flow or add nodes" class="typeahead search form-control tt-query" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;"><span style="position: absolute; left: -9999px; visibility: hidden; white-space: nowrap; font-family: Jura, Helvetica, serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></span><span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span>
+                </div>
+            </form>
+        </div>
+        <div id="flowControl" class="collapse navbar-collapse navbar-ex1-collapse"><ul class="nav navbar-nav" id="flowControl">
+            <li>
+                <button class="btn btn-default btn-xs navbar-btn" id="new-flow">New</button>
+                <button class="btn btn-default btn-xs navbar-btn" id="save-flow">Save</button>
+                <button class="btn btn-default btn-xs navbar-btn" id="save-flow-as">Save As...</button>
+                <button class="btn btn-default btn-xs navbar-btn" id="unclutter">Unclutter</button>
+                <button class="btn btn-default btn-xs navbar-btn" id="run-flow">Run!</button>
+                <button class="btn btn-default btn-xs navbar-btn" data-show-title="Show Stage" data-hide-title="Hide Stage" id="toggle-stage">Show Stage</button>
+            </li>
+            <li>
+                <form id="save-as-form" class="navbar-form navbar-left" role="save-as" style="display: none">
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control" placeholder="New title">
+                        <input type="text" name="ns" class="form-control" placeholder="package">
+                        <input type="text" name="name" class="form-control" placeholder="name">
+                        <textarea name="description" class="form-control" placeholder="description"></textarea>
+                        <button id="save-as-form-submit" type="submit" class="btn btn-default">Submit</button>
+                        <button id="save-as-form-cancel" class="btn btn-default">Cancel</button>
+                    </div>
+
+                </form></li>
+            <li>
+                <div class="navbar-btn" id="flow-title">New Flow</div>
+            </li>
+        </ul>
+
+        </div>
+    </nav>
+</template>
+
+<template id="serverSwitchTpl">
+    <div data-on="primary"
+         data-off="info"
+         data-on-label="Server"
+         data-off-label="Client"
+         class="make-switch switch-mini navbar-btn has-switch">
+        <div class="switch-animate switch-off"><input type="checkbox" checked="checked"><span class="switch-left switch-mini switch-primary">Server</span><label class="switch-mini">&nbsp;</label><span class="switch-right switch-mini switch-info">Client</span></div>
+    </div>
+</template>
+
+<template id="selectionControlTpl">
+    <div class="selectionBar"><span class="navbar-btn">0</span>
+        <span data-toggle="tooltip" title="Link Nodes" class="glyphicon glyphicon-link navbar-btn"></span>
+        <span data-toggle="tooltip" title="Remove Nodes" class="glyphicon glyphicon-trash navbar-btn"></span>
+    </div>
+</template>
+
+<template id="drawerTpl">
+    <div id="drawer" class="closed">
+        <ul id="drawerBar" class="navbar-text navbar">
+            <li id="drawer-flows" data-toggle="tooltip" title="Flows"><span>Flows</span></li>
+            <li id="drawer-treeview" data-toggle="tooltip" title="TreeView"><span>TreeView</span></li>
+            <li id="drawer-nodeview" data-toggle="tooltip" title="NodeEditor"><span>NodeEditor</span></li>
+            <!--li id="drawer-data" data-toggle="tooltip" title="Data"><span>Data</span></li -->
+        </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Drawer</h3>
+            </div>
+            <div id="drawer-flows-body" class="panel-body">
+                <!-- lets just make it like the drop down is right now -->
+                <form role="search" class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <span class="twitter-typeahead" style="position: relative; display: inline-block;"><input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled="" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);"><input type="search" placeholder="open flow or add nodes" class="typeahead search form-control tt-query" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;"><span style="position: absolute; left: -9999px; visibility: hidden; white-space: nowrap; font-family: Jura, Helvetica, serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></span><span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span>
+                    </div>
+                </form>
+            </div>
+            <div id="drawer-treeview-body" class="panel-body" style="display: none;"></div>
+            <div id="drawer-nodeview-body" class="panel-body" style="display: none;">
+                <form id="node-form"></form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="stageTpl">
+  <div class="stage"><div class="flow"></div></div>
+</template>
+
+<!--
+<div class="notifier"></div>
+
+<div id="id" audio=""></div>
+-->
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="graph.js"></script>
+<script src="bundle.js"></script>
+</body>
+</html>

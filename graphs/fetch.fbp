@@ -1,0 +1,16 @@
+title: Fetch Url
+ns: graphs
+name: fetch
+id: 'fetch-url'
+
+Api(superagent/api)
+End(superagent/end)
+Log(console/log)
+
+-> url Api
+
+Api request -> request End
+End body -> msg Log
+End error -> msg Log
+
+<- body Api

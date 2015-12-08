@@ -1,0 +1,9 @@
+.idea/
+.build/
+ATTIC/
+lib/
+*.swp
+node_modules/
+bower_components/
+*.txt
+.x.cache

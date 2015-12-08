@@ -1,0 +1,13 @@
+title: UI Graphs
+ns: teflon
+name: ui
+id: teflon-ui
+
+provider ./{ns}/{name}.fbp as x
+
+# only include, set url from code using Actor.sendIIP()
+
+Search(x:graphs/fetch)
+
+GetGraph(x:graphs/fetch)
+
