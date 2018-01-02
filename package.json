@@ -30,7 +30,6 @@
     "babel-polyfill": "^6.26.0",
     "dot-object": "^1.7.0",
     "lodash": "^4.17.4",
-    "reflux-core": "^1.0.0",
     "superagent": "^3.8.2",
     "teflon": "^0.3.1",
     "typeahead.js": "^0.11.1",
