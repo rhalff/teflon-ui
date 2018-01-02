@@ -1,7 +1,7 @@
 import Component from 'teflon'
 import DomPointer from 'dompointer'
 import Dot from 'dot-object'
-//import loaders from './loaders'
+// import loaders from './loaders'
 import assert from 'assert'
 import _ from 'lodash'
 
@@ -10,7 +10,7 @@ Dot.useArray = true
 // This UI thing will become Teflon
 // and Teflon will become Teflon.Component
 export default class UI {
-  constructor() {
+  constructor () {
     this.components = new Map()
     /**
      *
@@ -30,23 +30,23 @@ export default class UI {
    * @param {Object} def Component Definition
    * @returns {Teflon}
    */
-  static load(def) {
+  static load (def) {
     if (def.type) {
       if (loaders[def.type]) {
-        const component =  loaders.load(def)
+        const component = loaders.load(def)
         this.components.set(
           id,
           component
         )
         return component
-        //new Teflon(DomPointer.create(el))
+        // new Teflon(DomPointer.create(el))
       } else {
         throw Error(`Unable to find loader for type ${def.type}`)
       }
     }
   }
 
-  static register(name, loader) {
+  static register (name, loader) {
     loaders[name] = loader
   }
 
@@ -59,7 +59,7 @@ export default class UI {
    * @param component
    * @param data
    */
-  fill(comp, data) {
+  fill (comp, data) {
     // cannot just set replace the state, it must be merged.
     this.state.set(comp.name,
       _.merge(this.state.get(comp.name), data)
@@ -71,15 +71,15 @@ export default class UI {
   }
 
   // first make this load the default format
-  addComp(name, target, def) {
+  addComp (name, target, def) {
     const _this = this
     assert(def, 'Need a definition')
     assert(def.template, 'Need a template')
 
-    function internalRun(type, func) {
+    function internalRun (type, func) {
       // should make async possible
       if (type === 'data') {
-        return function(ev){
+        return function (ev) {
           // TODO: * from within component will not work
           // I want to remove this state, state will be external.
           // only thing to pass will be PATH.
@@ -88,8 +88,8 @@ export default class UI {
           Dot.object(res)
           _this.fill(this, res)
         }
-      } else if(type === 'ui') {
-        return function(ev, src){
+      } else if (type === 'ui') {
+        return function (ev, src) {
           // TODO: * from within component will not work
           const res = func(ev, _this.state.get(this.name), src)
           // TODO: what to do about unsetting the state?
@@ -126,7 +126,7 @@ export default class UI {
       Object.keys(def.properties).forEach(name => {
         dataMap[def.properties[name].path] = name
         switch (def.properties[name].type) {
-          case "array":
+          case 'array':
             // This triggers the bug
             // initializing bullets to []
             let key2 = def.properties[name].path
@@ -140,7 +140,7 @@ export default class UI {
               dataMap[key2].items[it.path] = key
             })
             break
-          case "object":
+          case 'object':
             initialState[name] = {}
             break
         }
@@ -185,13 +185,13 @@ export default class UI {
         })
       })
     }
-    //comp.ns = 'psichi'
+    // comp.ns = 'psichi'
     this.components.set(name, comp)
     return comp
   }
 
   // load the default format
-  addComponent(name, tplId, target, state) {
+  addComponent (name, tplId, target, state) {
     const tpl = document.getElementById(tplId)
     const el = document.querySelector(target)
     const comp = new Component(DomPointer.fromHTML(tpl.innerHTML))
@@ -201,7 +201,7 @@ export default class UI {
     }
     // Name should be required for a component, the ns should make it unique
     comp.name = name
-    //comp.ns = 'psichi'
+    // comp.ns = 'psichi'
     this.components.set(name, comp)
     return comp
   }
@@ -210,11 +210,11 @@ export default class UI {
    * Nicely formatted list of all available actions
    * Can be derived from the eventMaps
    */
-  getActionList() {
+  getActionList () {
 
   }
 
-  setActions(actions) {
+  setActions (actions) {
     Object.keys(actions).forEach(name => {
       for (const action of actions[name]) {
         if (this.components.has(name)) {
@@ -230,8 +230,8 @@ export default class UI {
     })
   }
 
-  render() {
-    for(const comp of this.components.values()) {
+  render () {
+    for (const comp of this.components.values()) {
       comp.render()
     }
   }

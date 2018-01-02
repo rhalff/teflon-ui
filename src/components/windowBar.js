@@ -43,7 +43,7 @@ export default {
         { label: 'PreviewWindow', title: 'PreviewWindow'}
       ],
       items: {
-        type: "object",
+        type: 'object',
         properties: {
           'label': {
             title: 'Label',
@@ -51,7 +51,7 @@ export default {
             path: ':0',
             type: 'number',
             'default': 0
-          },
+          }
           /* @title (direct) is not understood
           'title': {
             title: 'Title',
@@ -86,11 +86,11 @@ export default {
      *
      */
     ui: {
-      'setActive': function(ev, state, src) {
-        const dang = `button[${src.dataset.teflonIndex || 0 }]`
+      'setActive': function (ev, state, src) {
+        const dang = `button[${src.dataset.teflonIndex || 0}]`
         this.toggleState('active', this.dp.resolve(dang), true) // this.dp.getRef(path))
       },
-      'showFlow': function(ev, state, src) {
+      'showFlow': function (ev, state, src) {
         // not sure yet, should UI only be about state changes?
         return {
         }

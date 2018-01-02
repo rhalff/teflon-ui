@@ -8,12 +8,12 @@ import Dot from 'dot-object'
 export default {
   'iconBar': [
     {
-      //path: 'iconBar.play'
-      //path: 'iconBar.stop'
-      //path: 'bottomBar.bulletList.(on)repeat'
-      //path: 'bottomBar.bulletList.mouseover'
+      // path: 'iconBar.play'
+      // path: 'iconBar.stop'
+      // path: 'bottomBar.bulletList.(on)repeat'
+      // path: 'bottomBar.bulletList.mouseover'
       name: 'PLAY',
-      val: function(ev) {
+      val: function (ev) {
         console.log('PLAY', ev)
         if (!this.inState('play')) {
           this.activateState('play')
@@ -23,7 +23,7 @@ export default {
     },
     {
       name: 'STOP',
-      val: function(ev) {
+      val: function (ev) {
         console.log('STOP', ev)
         if (this.inState('play')) {
           this.disableState('play')
@@ -35,7 +35,7 @@ export default {
   'windowBar': [
     {
       name: '*',
-      val: function(action, ev) {
+      val: function (action, ev) {
         console.log(action, ev)
       }
     }
@@ -43,13 +43,13 @@ export default {
   'navBar': [
     {
       name: 'FLOW.*',
-      val: function(action, ev) {
+      val: function (action, ev) {
         console.log(action, ev)
       }
     },
     {
       name: 'AUTOCOMPLETE',
-      val: function(ev) {
+      val: function (ev) {
         let str = String.fromCharCode(ev.keyCode)
         console.log('YOUR KEY', str)
 
@@ -68,7 +68,7 @@ export default {
   'bullets': [
     {
       name: '*',
-      val: function(action, ev, path) {
+      val: function (action, ev, path) {
         console.log(action, ev, this.srcElement)
       }
     }

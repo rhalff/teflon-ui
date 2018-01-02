@@ -27,7 +27,7 @@ export default {
     },
     'play': {
       attributes: [
-        { path: 'icon-play', op: 'add', name: 'class', val: 'active'},
+        { path: 'icon-play', op: 'add', name: 'class', val: 'active'}
       ]
     }
   },
@@ -38,7 +38,7 @@ export default {
       type: 'array',
       'default': [
         // iconClass is not how it should be, rethink that later
-        { id: 'icon-close', title: 'Remove', iconClass: 'glyphicon glyphicon-remove' },
+        { id: 'icon-close', title: 'Remove', iconClass: 'glyphicon glyphicon-remove' }
       ],
       items: {
         type: 'object',

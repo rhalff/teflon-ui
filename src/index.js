@@ -42,5 +42,4 @@ Actor
     if (out.port === 'body') {
       console.log('Our body', out)
     }
-})
-
+  })

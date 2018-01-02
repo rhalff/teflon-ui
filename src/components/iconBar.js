@@ -40,7 +40,7 @@ export default {
         { path: 'icon-stop', op: 'add', name: 'click', val: 'STOP'},
         { path: 'icon-zoom-in', op: 'add', name: 'click', val: 'ZOOM-IN'},
         { path: 'icon-zoom-out', op: 'add', name: 'click', val: 'ZOOM-OUT'},
-        { path: 'icon-trash', op: 'add', name: 'click', val: 'DELETE'},
+        { path: 'icon-trash', op: 'add', name: 'click', val: 'DELETE'}
       ]
     },
     'play': {
@@ -68,7 +68,7 @@ export default {
         { id: 'icon-step', title: 'Step by step', iconClass: 'glyphicon glyphicon-step-forward' },
         { id: 'icon-stop', title: 'Stop', iconClass: 'glyphicon glyphicon-stop' },
         { id: 'icon-zoom-in', title: 'Zoom in', iconClass: 'glyphicon glyphicon-zoom-in' },
-        { id: 'icon-zoom-out',title: 'Zoom out', iconClass: 'glyphicon glyphicon-zoom-out' },
+        { id: 'icon-zoom-out', title: 'Zoom out', iconClass: 'glyphicon glyphicon-zoom-out' },
         { id: 'icon-trash', title: 'Remove', iconClass: 'glyphicon glyphicon-trash' }
       ],
       items: {
@@ -118,11 +118,11 @@ export default {
      *
      */
     ui: {
-      'setActive': function(ev, state, src) {
-        const dang = `button[${src.dataset.teflonIndex || 0 }]`
+      'setActive': function (ev, state, src) {
+        const dang = `button[${src.dataset.teflonIndex || 0}]`
         this.toggleState('active', this.dp.resolve(dang), true) // this.dp.getRef(path))
       },
-      'showFlow': function(ev, state, src) {
+      'showFlow': function (ev, state, src) {
         // not sure yet, should UI only be about state changes?
         return {
         }

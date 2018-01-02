@@ -1,13 +1,13 @@
-export function createElement(html) {
+export function createElement (html) {
   const div = document.createElement('div')
   div.innerHTML = html
 
   return div
 }
 
-export function click(el) {
+export function click (el) {
   const ev = document.createEvent('MouseEvents')
-  ev.initMouseEvent( /* deprecated but works */
+  ev.initMouseEvent(/* deprecated but works */
     'click',
     true, true,
     document.defaultView,
@@ -18,4 +18,3 @@ export function click(el) {
   )
   el.dispatchEvent(ev)
 }
-

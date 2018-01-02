@@ -1,46 +1,41 @@
-/* global __dirname */
+const path = require('path')
 
-var path = require('path');
+const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-var webpack = require('webpack');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-
-var dir_js = path.resolve(__dirname, 'src');
-var dir_html = path.resolve(__dirname, 'html');
-var dir_build = path.resolve(__dirname, 'build');
+const dirJs = path.resolve(__dirname, 'src')
+const dirHtml = path.resolve(__dirname, 'html')
+const dirBuild = path.resolve(__dirname, 'build')
 
 module.exports = {
-  entry: path.resolve(dir_js, 'index.js'),
+  entry: path.resolve(dirJs, 'index.js'),
   output: {
-    path: dir_build,
+    path: dirBuild,
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: dir_build,
+    contentBase: dirBuild
   },
   module: {
     loaders: [
       {
         loader: 'babel-loader',
-        test: dir_js,
+        test: dirJs,
         query: {
-          presets: ['es2015'],
-        },
+          presets: ['es2015']
+        }
       }
     ]
   },
   plugins: [
-    // Simply copies the files over
     new CopyWebpackPlugin([
-      { from: dir_html } // to: output.path
+      { from: dirHtml } // to: output.path
     ]),
     // Avoid publishing files when compilation fails
     new webpack.NoErrorsPlugin()
   ],
   stats: {
-    // Nice colored output
     colors: true
   },
-  // Create Sourcemaps for the bundle
-  devtool: 'source-map',
-};
+  devtool: 'source-map'
+}

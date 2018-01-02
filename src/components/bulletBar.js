@@ -31,7 +31,7 @@ export default {
     },
     active: {
       attributes: [
-        //{ path: 'button', op: 'add', name: 'class', val: 'active' }
+        // { path: 'button', op: 'add', name: 'class', val: 'active' }
         // omit path so we can specify it ourselfs
         // do keep track of that state though
         { op: 'add', name: 'class', val: 'active' }
@@ -50,7 +50,7 @@ export default {
         { anchor: '#/flow/4', label: '4', title: 'Flow 4'}
       ],
       items: {
-        type: "object",
+        type: 'object',
         properties: {
           anchor: {
             title: 'Anchor',
@@ -94,11 +94,11 @@ export default {
    */
   handlers: {
     ui: {
-      'setActive': function(ev, state, src) {
-        const dang = `button[${src.dataset.teflonIndex || 0 }]`
+      'setActive': function (ev, state, src) {
+        const dang = `button[${src.dataset.teflonIndex || 0}]`
         this.toggleState('active', this.dp.resolve(dang), true) // this.dp.getRef(path))
       },
-      'showFlow': function(ev, state, src) {
+      'showFlow': function (ev, state, src) {
         // not sure yet, should UI only be about state changes?
         return {
         }
