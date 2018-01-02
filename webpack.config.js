@@ -30,9 +30,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: dirHtml } // to: output.path
-    ]),
-    // Avoid publishing files when compilation fails
-    new webpack.NoErrorsPlugin()
+    ])
   ],
   stats: {
     colors: true
